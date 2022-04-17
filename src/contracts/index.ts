@@ -1,4 +1,4 @@
-import contractABI from './abi.json';
+import contractABI from './abi';
 
 export const getContractDetails = (
   chainId: string,

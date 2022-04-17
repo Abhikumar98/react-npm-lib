@@ -2,7 +2,6 @@ import { getContractDetails } from '../contracts';
 import axios from 'axios';
 
 export const fetchMessages = async (
-  account: string,
   limit: number,
   chainId: string,
   // page: number

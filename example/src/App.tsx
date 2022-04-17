@@ -1,7 +1,7 @@
 import React, { VFC } from 'react';
 import styled from 'styled-components';
 
-import { TestComponent } from './reactComponentLib';
+import { threadReply } from './reactComponentLib';
 
 const StyledDiv = styled.div`
   padding: 10px;
@@ -9,9 +9,14 @@ const StyledDiv = styled.div`
   color: white;
 `;
 
-export const App: VFC = () => (
-  <div>
-    <TestComponent text="Styled Component from React library" />
-    <StyledDiv>Example App styled component</StyledDiv>
-  </div>
-);
+export const App: VFC = () => {
+  const reply = () => {
+    // threadReply();
+  };
+
+  return (
+    <div>
+      <StyledDiv>Example App styled component</StyledDiv>
+    </div>
+  );
+};
