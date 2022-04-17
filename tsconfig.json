@@ -8,6 +8,7 @@
     "noUnusedParameters": true,
     "strictNullChecks": true,
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     "noImplicitAny": true,
     "outDir": "./dist",
     "target": "es5",

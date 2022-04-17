@@ -1,3 +1,3 @@
-import { TestComponent } from './components/TestComponent/TestComponent';
+import { saveMessageOnIPFS, threadReply } from './utils/helpers';
 
-export { TestComponent };
+export { saveMessageOnIPFS, threadReply };
