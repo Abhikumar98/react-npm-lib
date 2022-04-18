@@ -1,7 +1,7 @@
 import React, { VFC } from 'react';
 import styled from 'styled-components';
 
-import { startNewThread, getAllUserThreads, getAllUserSentThreads } from './reactComponentLib';
+import { startNewThread, getAllUserThreads, getAllUserSentThreads } from '@abhikumar_98/test3';
 
 const StyledDiv = styled.div`
   padding: 10px;

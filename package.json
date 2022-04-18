@@ -1,5 +1,5 @@
 {
-  "name": "react-component-lib",
+  "name": "@abhikumar_98/test3",
   "version": "1.0.0",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -32,13 +32,20 @@
   "peerDependencies": {
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "@apollo/client": "^3.5.10",
+    "@metamask/eth-sig-util": "^4.0.0",
+    "@types/crypto-js": "^4.1.1",
+    "axios": "^0.26.1",
+    "crypto-js": "^4.1.1",
+    "ethers": "^5.6.4",
+    "ipfs-http-client": "^56.0.2",
+    "uuidv4": "^6.2.13"
   },
   "scripts": {
     "build": "rollup -c",
     "build-watch": "rollup -c -w",
     "prepublishOnly": "npm run build",
-    "postinstall": "install-peers -f && cd example && npm i",
     "start-example": "cd example && npm start",
     "deploy-example": "cd example && npm run deploy",
     "dev": "concurrently --kill-others \"npm run build-watch\" \"npm run start-example\"",
