@@ -52,6 +52,7 @@
     "dist"
   ],
   "dependencies": {
+    "@apollo/client": "^3.5.10",
     "@metamask/eth-sig-util": "^4.0.0",
     "@types/crypto-js": "^4.1.1",
     "axios": "^0.26.1",

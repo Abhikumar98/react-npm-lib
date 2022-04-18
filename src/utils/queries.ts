@@ -1,9 +1,9 @@
-import { getContractDetails } from '../contracts';
+import { ChainId, getContractDetails } from '../contracts';
 import axios from 'axios';
 
 export const fetchMessages = async (
   limit: number,
-  chainId: string,
+  chainId: ChainId,
   // page: number
 ): Promise<any> => {
   const { subgraphURL } = getContractDetails(chainId);
@@ -12,9 +12,9 @@ export const fetchMessages = async (
                 messages(first: ${limit}) {
                     id
                     _receiver
-					_sender
+                    _sender
                     _uri
-					_timestamp
+                    _timestamp
                 }
         }`,
   });
@@ -22,7 +22,7 @@ export const fetchMessages = async (
   return response.data.data.messages;
 };
 
-export const getAllUserThreads = async (address: string, chainId: string): Promise<any> => {
+export const getAllUserThreads = async (address: string, chainId: ChainId): Promise<any> => {
   if (!address) return null;
 
   const { subgraphURL } = getContractDetails(chainId);
@@ -43,7 +43,7 @@ export const getAllUserThreads = async (address: string, chainId: string): Promi
   return response.data.data.threads;
 };
 
-export const getAllUserSentThreads = async (address: string, chainId: string): Promise<any> => {
+export const getAllUserSentThreads = async (address: string, chainId: ChainId): Promise<any> => {
   if (!address) return null;
 
   const { subgraphURL } = getContractDetails(chainId);
@@ -63,7 +63,7 @@ export const getAllUserSentThreads = async (address: string, chainId: string): P
 
   return response.data.data.threads;
 };
-export const getThread = async (threadId: string, chainId: string): Promise<any> => {
+export const getThread = async (threadId: string, chainId: ChainId): Promise<any> => {
   const { subgraphURL } = getContractDetails(chainId);
   const response = await axios.post(subgraphURL, {
     query: `{
@@ -83,7 +83,7 @@ export const getThread = async (threadId: string, chainId: string): Promise<any>
   return response.data.data.threads[0];
 };
 
-export const getAllThreadMessages = async (threadId: string, chainId: string): Promise<any> => {
+export const getAllThreadMessages = async (threadId: string, chainId: ChainId): Promise<any> => {
   const { subgraphURL } = getContractDetails(chainId);
   const response = await axios.post(subgraphURL, {
     query: `{

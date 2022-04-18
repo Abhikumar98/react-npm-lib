@@ -1,4 +1,4 @@
-import { saveMessageOnIPFS, threadReply } from './utils/helpers';
-import { getAllThreadMessages, getAllUserThreads, getThread } from './utils/queries';
+import { startNewThread, threadReply } from './crypto';
+import { getAllThreadMessages, getAllUserThreads, getThread, getAllUserSentThreads } from './utils/queries';
 
-export { saveMessageOnIPFS, threadReply, getAllThreadMessages, getAllUserThreads, getThread };
+export { startNewThread, threadReply, getAllThreadMessages, getAllUserThreads, getThread, getAllUserSentThreads };

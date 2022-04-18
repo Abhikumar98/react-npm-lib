@@ -1,7 +1,9 @@
 import contractABI from './abi';
 
+export type ChainId = '0x1' | '0x89' | '0x4';
+
 export const getContractDetails = (
-  chainId: string,
+  chainId: ChainId,
 ): {
   contractAddress: string;
   contractABI: any;
