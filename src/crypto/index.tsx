@@ -8,9 +8,18 @@ import {
   decryptMessage,
   encryptMessage,
   fetchFromIPFS,
+  getPublicEncryptionKey,
   uploadToIPFS,
 } from '../utils/helpers';
 import { getThread, getAllThreadMessages } from '../utils/queries';
+
+export const onboardUser = async (account: string, chainId: ChainId): Promise<void> => {
+  const key = await getPublicEncryptionKey(account);
+  await contract(chainId).setPubEncKey(key);
+};
+
+export const checkUserOnboarding = async (chainId: ChainId): Promise<boolean> =>
+  !!(await contract(chainId).checkUserRegistration());
 
 export const startNewThread = async (
   receiver: string,

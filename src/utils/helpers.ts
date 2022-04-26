@@ -69,3 +69,18 @@ export const contract = (chainId: ChainId): ethers.Contract => {
 export const decryptCipherMessage = (message: string, encKey: string): string => {
   return AES.decrypt(message, encKey).toString(enc.Utf8);
 };
+
+export const getPublicEncryptionKey = async (account: string): Promise<string | null> => {
+  const { ethereum } = window;
+
+  if (ethereum) {
+    const pubEncryptionKey = await ethereum.request({
+      method: 'eth_getEncryptionPublicKey',
+      params: [account],
+    });
+
+    return pubEncryptionKey;
+  }
+
+  return null;
+};
