@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@abhikumar_98/test3@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@abhikumar_98/test3/-/test3-1.0.0.tgz#27c381170186fe609f2f03e5216257410b92379a"
-  integrity sha512-a8niJjzB3AY+sqAdIsZOQmQcudNeur9haHS35d4UEOuneZXXZLCKRkyxaLXShaoApJ+FPglrjagvFCkyV3J4Ag==
+"@abhikumar_98/test3@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@abhikumar_98/test3/-/test3-1.1.0.tgz#023ed96267fb5aa9e8b7bd87ec770324edb56ac9"
+  integrity sha512-rE33YIDqUXy+Td0KhlcELhLbAv5jSnMtvkEHesAwiNM9YWWw7/8iIvFnXq1WqJJ7sgxKxRRft42MyHUmLmfOVQ==
   dependencies:
     "@apollo/client" "^3.5.10"
     "@metamask/eth-sig-util" "^4.0.0"

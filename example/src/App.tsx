@@ -1,7 +1,20 @@
 import React, { VFC } from 'react';
 import styled from 'styled-components';
 
-import { startNewThread, getAllUserThreads, getAllUserSentThreads } from '@abhikumar_98/test3';
+import {
+  startNewThread,
+  getAllUserThreads,
+  getAllUserSentThreads,
+  onboardUser,
+  checkUserOnboarding,
+} from './reactComponentLib';
+// import {
+//   startNewThread,
+//   getAllUserThreads,
+//   getAllUserSentThreads,
+//   onboardUser,
+//   checkUserOnboarding,
+// } from '@abhikumar_98/test3';
 
 const StyledDiv = styled.div`
   padding: 10px;
@@ -11,7 +24,7 @@ const StyledDiv = styled.div`
 
 export const App: VFC = () => {
   const reply = () => {
-    startNewThread('0xAD6561E9e306C923512B4ea7af902994BEbd99B8', 'Something', 'Another thing', '0x4');
+    startNewThread('0xad6561e9e306c923512b4ea7af902994bebd99b8', 'Something', 'Another thing', '0x1');
   };
 
   const fetchMessages = async () => {
@@ -20,12 +33,18 @@ export const App: VFC = () => {
     console.log({ data, response });
   };
 
+  const onboardingCheck = async () => {
+    const data = await onboardUser('0xad6561e9e306c923512b4ea7af902994bebd99b8', '0x4');
+    const response = await checkUserOnboarding('0x4');
+    console.log({ data, response });
+  };
+
   return (
     <div>
       <StyledDiv>Example App styled component</StyledDiv>
       <button onClick={reply}>Click</button>
       <button onClick={fetchMessages}>Fetch</button>
-      <button onClick={fetchMessages}>Fetch sent</button>
+      <button onClick={onboardingCheck}>onboard</button>
     </div>
   );
 };
