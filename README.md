@@ -1,32 +1,137 @@
-# react-component-lib
+# Dakiya SDK
 
-This is a boilerplate repository for creating npm packages with React components written in TypeScript and using styled-components.
+Send messages on chain to any ethereum address.
 
-Medium article explaining step by step how to use this repo to publish your own library to NPM:
-https://medium.com/@xfor/developing-publishing-react-component-library-to-npm-styled-components-typescript-cc8274305f5a
-
-## Installation:
-
-To install all dependencies run:
+## Usage
 
 ```
-npm i
+npm i @dakiya/sdk
+
+or
+
+yarn add @dakiya/sdk
+
 ```
 
-It will install:
+## Steps
 
-- `dependencies` and `devDependencies` from ./package.json
-- `peerDependencies` from ./package.json thanks to `install-peers-cli`
-- `dependencies` and `devDependencies` from ./example/package.json (example `create react app` for testing)
+1. On board user before sending messages
 
-## Developing your library:
+```
+import { onboardUser } from "@dakiya/sdk";
 
-To start developing your library, run `npm run dev`. It will build your library and run example `create-react-app` where you can test your components. Each time you make changes to your library or example app, app will be reloaded to reflect your changes.
+const App = () => {
 
-## Styled-components:
+    const handleOnBoard = async () => {
 
-Developing library with components built with styled-components is challenging because you have to keep only one instance of styled-components. If you would just symlink your library (`file:../` or `npm link`) to example app that is also using styled-components you'll get a console warning about multiple instances of styled-components (even though styled-components are peer dependency) and your styles will be possibly broken. To be able to conveniently develop styled components I am injecting bundled files directly into example app's /src folder and importing it in App.tsx along with type declaration.
+        const account = ""; // current connected account from metamask
+        const chainId = "0x1"' // current chain id from metamask
 
-## Typescript
+        const user = await onboardUser(account, chainId);
+        console.log(user);
+    }
 
-This boilerplate lets you develop your libraries in Typescript and you can simultaneously test it in Typescript example create-react-app.
+    return <button onClick={handleOnBoard}>Let's get started</button>
+}
+
+```
+
+2. Start sending messages :)
+
+```
+import { createThread } from "@dakiya/sdk";
+
+const App = () => {
+
+    const startNewThread = async () => {
+
+        const createThreadParams = {
+            receiver: "someone.eth"
+            subject: "Hello world !";
+            message: "Basic hello";
+            chainId: "0x1";
+        }
+
+        const newThread = await createThread(createThreadParams);
+    }
+
+    return <button onClick={startNewThread}>Say Hello</button>
+}
+
+```
+
+3. Start sending messages :)
+
+```
+import { threadReply } from "@dakiya/sdk";
+
+const App = () => {
+
+    const startNewThread = async () => {
+
+        const threadReplyParams = {
+            receiver: "",
+            message: "",
+            threadId: "",
+            encryptionKey: "", // thread's encryption key
+            senderPubEncKey: "0x...", // sender's public encryption key
+            receiverPubEncKey: "", // reciever's public encryption key
+            encrypt: true, // is thread encrypted?
+            chainId: "0x1"
+        }
+
+        /**
+        encryptionKey, senderPubEncKey, receiverPubEncKey, encrypt are supposed to be passed from the thread details when decrypted while loading the thread
+        */
+
+        const newThread = await createThread(threadReplyParams);
+    }
+
+    return <button onClick={startNewThread}>Say Hello</button>
+}
+
+```
+
+4. Fetching messages from thread
+
+```
+import { getMessagesFromThread } from "@dakiya/sdk";
+
+const App = () => {
+
+    const fetchMessages = async () => {
+
+        const getMessagesParams = {
+            account: "", // current connected account from metamask
+            threadId: "",
+            encryptionKey: "", // thread's encryption key
+            chainId: "0x1"
+        }
+
+        const newThread = await getMessagesFromThread(getMessagesParams);
+    }
+
+    return <button onClick={fetchMessages}>Say Hello</button>
+}
+```
+
+5. Getting subject of Thread while getting messages
+
+```
+import { getSubject } from "@dakiya/sdk";
+
+const App = () => {
+
+    const fetchThreadSubject = async () => {
+
+        const subjectParams = {
+            subjectURI: "", // thread's encryption key
+            encryptionKey: ""
+        }
+
+        const newThread = await getSubject(subjectParams);
+    }
+
+    return <button onClick={fetchThreadSubject}>Say Hello</button>
+}
+```

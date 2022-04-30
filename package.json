@@ -1,10 +1,14 @@
 {
   "name": "@abhikumar_98/test3",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
+  "author": {
+    "name": "Abhikumar",
+    "github": "Abhikumar98"
+  },
   "repository": {
-    "url": "https://github.com/michal-wrzosek/react-component-lib",
+    "url": "https://github.com/Abhikumar98/react-npm-lib",
     "type": "git"
   },
   "license": "MIT",

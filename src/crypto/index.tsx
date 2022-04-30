@@ -1,8 +1,9 @@
 import { AES } from 'crypto-js';
 import { uuid } from 'uuidv4';
 import { ChainId } from '../contracts';
-import { ThreadData, Message } from '../interface';
+import { Message, ThreadData } from '../interface';
 import {
+  checkForMetamask,
   contract,
   decryptCipherMessage,
   decryptMessage,
@@ -11,7 +12,7 @@ import {
   getPublicEncryptionKey,
   uploadToIPFS,
 } from '../utils/helpers';
-import { getThread, getAllThreadMessages } from '../utils/queries';
+import { getAllThreadMessages, getThread } from '../utils/queries';
 
 export const onboardUser = async (account: string, chainId: ChainId): Promise<void> => {
   const key = await getPublicEncryptionKey(account);
@@ -21,12 +22,16 @@ export const onboardUser = async (account: string, chainId: ChainId): Promise<vo
 export const checkUserOnboarding = async (chainId: ChainId): Promise<boolean> =>
   !!(await contract(chainId).checkUserRegistration());
 
-export const startNewThread = async (
-  receiver: string,
-  subject: string,
-  message: string,
-  chainId: ChainId,
-): Promise<any> => {
+export interface CreateThreadParams {
+  receiver: string;
+  subject: string;
+  message: string;
+  chainId: ChainId;
+}
+
+export const startNewThread = async (threadDetails: CreateThreadParams): Promise<any> => {
+  checkForMetamask();
+  const { receiver, subject, message, chainId } = threadDetails;
   const [senderPubEncKey, receiverPubEncKey] = await contract(chainId).getPubEncKeys(receiver);
 
   const dataToEncrypt = JSON.stringify({
@@ -55,16 +60,21 @@ export const startNewThread = async (
   return response;
 };
 
-export const threadReply = async (
-  receiver: string,
-  message: string,
-  threadId: string,
-  encryptionKey: string,
-  senderPubEncKey: string,
-  receiverPubEncKey: string,
-  encrypt: boolean,
-  chainId: ChainId,
-): Promise<void> => {
+export interface ReplyThreadParams {
+  receiver: string;
+  message: string;
+  threadId: string;
+  encryptionKey: string;
+  senderPubEncKey: string;
+  receiverPubEncKey: string;
+  encrypt: boolean;
+  chainId: ChainId;
+}
+
+export const threadReply = async (threadReplyParams: ReplyThreadParams): Promise<void> => {
+  checkForMetamask();
+  const { receiver, message, threadId, encryptionKey, senderPubEncKey, receiverPubEncKey, encrypt, chainId } =
+    threadReplyParams;
   const dataToEncrypt = JSON.stringify({
     message,
   });
@@ -83,12 +93,16 @@ export const threadReply = async (
   await tx.wait();
 };
 
-export const getMessagesFromThread = async (
-  threadId: string,
-  chainId: ChainId,
-  encryptionKey: string,
-  account: string,
-): Promise<ThreadData> => {
+export interface GetMessageParams {
+  threadId: string;
+  chainId: ChainId;
+  encryptionKey: string;
+  account: string;
+}
+
+export const getMessagesFromThread = async (messageParams: GetMessageParams): Promise<ThreadData> => {
+  checkForMetamask();
+  const { threadId, chainId, encryptionKey, account } = messageParams;
   const threadData: ThreadData = {
     subject: '',
     messages: [],
@@ -144,7 +158,13 @@ export const getMessagesFromThread = async (
   return threadData;
 };
 
-export const getSubject = async (subjectURI: string, encryptionKey: string): Promise<string> => {
+export const getSubject = async ({
+  subjectURI,
+  encryptionKey,
+}: {
+  subjectURI: string;
+  encryptionKey: string;
+}): Promise<string> => {
   const ipfsMessage = await fetchFromIPFS(subjectURI);
   const decryptedString = decryptCipherMessage(ipfsMessage, encryptionKey);
   const parsedData = JSON.parse(decryptedString);

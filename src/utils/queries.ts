@@ -29,9 +29,9 @@ export const getAllUserThreads = async (address: string, chainId: ChainId): Prom
   console.log({ chainId, subgraphURL });
   const response = await axios.post(subgraphURL, {
     query: `{
-                threads(where: { _receiver: "${address}" }) {
-                    id
-                    _receiver
+          threads(where: { _receiver: "${address}" }) {
+              id
+              _receiver
 					_sender
 					_thread_id
 					_timestamp

@@ -84,3 +84,16 @@ export const getPublicEncryptionKey = async (account: string): Promise<string | 
 
   return null;
 };
+
+export const checkForMetamask = () => {
+  const { ethereum } = window;
+  if (!ethereum) {
+    throw new Error('No ethereum object found');
+  }
+
+  const { isMetaMask } = ethereum;
+
+  if (!isMetaMask) {
+    throw new Error('No metamask found');
+  }
+};
