@@ -1,6 +1,6 @@
 import React, { VFC } from 'react';
 import styled from 'styled-components';
-import { startNewThread } from './reactComponentLib';
+import { DakiyaProvider, useDakiya } from './reactComponentLib';
 
 // import { createThread } from '@abhikumar_98/test3';
 
@@ -11,6 +11,19 @@ const StyledDiv = styled.div`
 `;
 
 export const App: VFC = () => {
+  return (
+    <div>
+      <DakiyaProvider applicationKey="dakiya">
+        <StyledDiv>Example App styled component</StyledDiv>
+        <ChildComponent />
+      </DakiyaProvider>
+    </div>
+  );
+};
+
+const ChildComponent = () => {
+  const { startNewThread } = useDakiya();
+
   const reply = () => {
     console.log('here?');
 
@@ -33,10 +46,9 @@ export const App: VFC = () => {
     // const response = await checkUserOnboarding('0x4');
     // console.log({ data, response });
   };
-
   return (
     <div>
-      <StyledDiv>Example App styled component</StyledDiv>
+      {' '}
       <button onClick={reply}>Click</button>
       <button onClick={fetchMessages}>Fetch</button>
       <button onClick={onboardingCheck}>onboard</button>

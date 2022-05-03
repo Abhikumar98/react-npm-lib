@@ -1,13 +1,5 @@
-import { startNewThread, threadReply, onboardUser, checkUserOnboarding } from './crypto';
-import { getAllThreadMessages, getAllUserThreads, getThread, getAllUserSentThreads } from './utils/queries';
+import useDakiya from './hooks/useDakiya';
+import useQueries from './hooks/useQueries';
+import { DakiyaProvider } from './context/DakiyaContext';
 
-export {
-  startNewThread,
-  threadReply,
-  getAllThreadMessages,
-  getAllUserThreads,
-  getThread,
-  getAllUserSentThreads,
-  onboardUser,
-  checkUserOnboarding,
-};
+export { useDakiya, useQueries, DakiyaProvider };

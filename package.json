@@ -1,6 +1,6 @@
 {
   "name": "@abhikumar_98/test3",
-  "version": "1.1.1",
+  "version": "1.2.1",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "author": {
@@ -34,9 +34,6 @@
     "typescript": "^4.0.5"
   },
   "peerDependencies": {
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "styled-components": "^5.2.1",
     "@apollo/client": "^3.5.10",
     "@metamask/eth-sig-util": "^4.0.0",
     "@types/crypto-js": "^4.1.1",
@@ -44,6 +41,9 @@
     "crypto-js": "^4.1.1",
     "ethers": "^5.6.4",
     "ipfs-http-client": "^56.0.2",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "styled-components": "^5.2.1",
     "uuidv4": "^6.2.13"
   },
   "scripts": {
@@ -70,6 +70,7 @@
     "crypto-js": "^4.1.1",
     "ethers": "^5.6.4",
     "ipfs-http-client": "^56.0.2",
+    "react": "^18.1.0",
     "uuidv4": "^6.2.13"
   }
 }
